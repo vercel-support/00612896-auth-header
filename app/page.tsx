@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+const baseURL = process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : 'http://localhost:3000';
+
 export default function Home() {
   const [testResult, setTestResult] = useState<any>(null);
   const [loading, setLoading] = useState(false);
@@ -152,14 +154,14 @@ export default function Home() {
             <div>
               <h3 className="font-medium text-gray-900 dark:text-white mb-2">Without Authorization:</h3>
               <pre className="bg-gray-100 dark:bg-gray-700 p-3 rounded text-sm overflow-x-auto">
-                curl -X GET "http://localhost:3000/api/test" -H "Content-Type: application/json"
+                curl -X GET "{baseURL}/api/test" -H "Content-Type: application/json"
               </pre>
             </div>
 
             <div>
               <h3 className="font-medium text-gray-900 dark:text-white mb-2">With Authorization:</h3>
               <pre className="bg-gray-100 dark:bg-gray-700 p-3 rounded text-sm overflow-x-auto">
-                curl -X GET "http://localhost:3000/api/test" \<br/>
+                curl -X GET "{baseURL}/api/test" \<br/>
                   -H "Content-Type: application/json" \<br/>
                   -H "Authorization: Bearer your-token-here"
               </pre>
